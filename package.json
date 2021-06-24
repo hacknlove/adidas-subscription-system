@@ -6,15 +6,15 @@
   "license": "MIT",
   "workspaces": [
     "mailer",
-    "publicAPI",
-    "privateAPI",
+    "public-api",
+    "private-api",
     "subscription",
     "shared"
   ],
   "type": "module",
   "private": true,
   "scripts": {
-    "getToken": "docker-compose -f ./docker/dev/docker-compose.yml -p adidas-subscription-dev run publicAPI node scripts/jwt.js",
+    "getToken": "docker-compose -f ./docker/dev/docker-compose.yml -p adidas-subscription-dev run mailer node scripts/jwt.js",
     "dev": "docker-compose -f ./docker/dev/docker-compose.yml -p adidas-subscription-dev up"
   }
 }
