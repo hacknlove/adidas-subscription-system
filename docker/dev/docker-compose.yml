@@ -1,0 +1,84 @@
+version: '3.8'
+services:
+  mongo:
+    image: mongo
+    logging:
+      driver: none
+    ports:
+      - 17017:27017
+    networks:
+      - private
+
+  mailer:
+    image: adidas-subscription-dev
+    build:
+      context: ../../
+      dockerfile: docker/dev/Dockerfile
+    volumes:
+      - ../../:/home/node/app
+    networks:
+      - private
+    command: yarn workspace mailer dev
+    environment:
+      PORT: 80
+
+  subscription:
+    image: adidas-subscription-dev
+    build:
+      context: ../../
+      dockerfile: docker/dev/Dockerfile
+    volumes:
+      - ../../:/home/node/app
+    depends_on:
+      - mongo
+    networks:
+      - public
+      - private
+
+    command: yarn workspace subscription dev
+    environment:
+      MONGO_URL: ${MONGO_URL}
+      PORT: 80
+
+  publicAPI:
+    image: adidas-subscription-dev
+    build:
+      context: ../../
+      dockerfile: docker/dev/Dockerfile
+    volumes:
+      - ../../:/home/node/app
+    depends_on:
+      - subscription
+    ports: 
+      - 8000:8000
+    networks:
+      - public
+    command: yarn workspace publicAPI dev
+    environment:
+      SUBSCRIPTION_URL: ${SUBSCRIPTION_URL}
+      JWT_SECRET: ${JWT_SECRET}
+
+  privateAPI:
+    image: adidas-subscription-dev
+    build:
+      context: ../../
+      dockerfile: docker/dev/Dockerfile
+    volumes:
+      - ../../:/home/node/app
+    depends_on:
+      - subscription
+    ports: 
+      - 8000:8001
+    networks:
+      - private
+    command: yarn workspace privateAPI dev
+    environment:
+      SUBSCRIPTION_URL: ${SUBSCRIPTION_URL}
+      MAILER: ${MAILER_URL}
+      JWT_SECRET: ${JWT_SECRET}
+
+networks:
+  subscription:
+  common:
+  public:
+  private:

@@ -1,0 +1,20 @@
+{
+  "name": "adidas",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Antonio Fernández Porrúa <antonio@pykiss.com>",
+  "license": "MIT",
+  "workspaces": [
+    "mailer",
+    "publicAPI",
+    "privateAPI",
+    "subscription",
+    "shared"
+  ],
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "getToken": "docker-compose -f ./docker/dev/docker-compose.yml -p adidas-subscription-dev run publicAPI node scripts/jwt.js",
+    "dev": "docker-compose -f ./docker/dev/docker-compose.yml -p adidas-subscription-dev up"
+  }
+}
