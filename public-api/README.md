@@ -28,6 +28,20 @@ Install with yarn from the workspaces root folder
   yarn workspace public-api test
 ```
 
+## Generating the docs 
+
+Install with yarn from the workspaces root folder
+
+### From this folder
+```bash
+  yarn apidoc
+```
+
+### From the worspaces root folder 
+
+```bash
+  yarn workspace public-api apidoc
+```
 
 
 ## Environment Variables
