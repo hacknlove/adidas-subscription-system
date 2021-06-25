@@ -6,10 +6,21 @@
   "private": true,
   "type": "module",
   "devDependencies": {
-    "mongodb": "^3.6.9",
-    "nodemon": "^2.0.7"
+    "@shelf/jest-mongodb": "^1.2.5",
+    "apidoc": "^0.28.1",
+    "apidoc-markdown": "^5.2.3",
+    "jest": "^27.0.5",
+    "nodemon": "^2.0.7",
+    "seedrandom": "^3.0.5",
+    "supertest": "^6.1.3"
   },
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "apidoc": "apidoc -e node_modules -e ./doc ; apidoc-markdown -p ./doc -o ./API.md ; rm -r ./doc"
+  },
+  "dependencies": {
+    "kafkajs": "^1.15.0",
+    "mongodb": "^3.6.9"
   }
 }

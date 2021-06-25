@@ -4,9 +4,8 @@ services:
     image: mongo
     logging:
       driver: none
-    ports:
-      - 17017:27017
-
+    volumes:
+      - ../../scripts:/scripts
 
   zookeeper:
     image: docker.io/bitnami/zookeeper:3.7

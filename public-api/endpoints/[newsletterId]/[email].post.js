@@ -1,7 +1,7 @@
 /**
  * @api {post} /[newsletterId]/[email] New Subscription
  * @apiName newSubscription
- * @apiDescription It checks the permisions, validate the parameters, and send a request to the subscription service and pipes the response back 
+ * @apiDescription It checks the permissions, validates the parameters, and sends a request to the subscription service and pipes the response back 
  * @apiGroup Subscription
  * @apiVersion 1.0.0
  * @apiUse newsletterId
