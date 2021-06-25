@@ -4,17 +4,16 @@
   "main": "index.js",
   "license": "MIT",
   "private": true,
-  "dependencies": {
-    "cookie-parser": "^1.4.5",
-    "dotenv": "^10.0.0",
-    "jsonwebtoken": "^8.5.1"
-  },
+  "dependencies": {},
   "scripts": {
     "dev": "nodemon index.js",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "apidoc": "apidoc -e node_modules -e ./doc ; apidoc-markdown -p ./doc -o ./API.md ; rm -r ./doc"
   },
   "type": "module",
   "devDependencies": {
+    "apidoc": "^0.28.1",
+    "apidoc-markdown": "^5.2.3",
     "jest": "^27.0.5",
     "nodemon": "^2.0.7",
     "supertest": "^6.1.3"

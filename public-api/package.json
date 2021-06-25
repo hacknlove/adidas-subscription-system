@@ -4,11 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "private": true,
-  "dependencies": {
-    "cookie-parser": "^1.4.5",
-    "dotenv": "^10.0.0",
-    "jsonwebtoken": "^8.5.1"
-  },
+  "dependencies": {},
   "scripts": {
     "dev": "nodemon index.js",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
