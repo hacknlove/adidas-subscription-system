@@ -1,5 +1,7 @@
 import Ajv from 'ajv';
 
+const ajv = new Ajv();
+
 export default function validationFactory (schema) {
   return function validation (req, res, next) {
     const data = {}

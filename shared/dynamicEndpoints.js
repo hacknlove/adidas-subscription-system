@@ -3,8 +3,10 @@ import glob from 'glob';
 
 const cwd = process.cwd();
 
-const defaultRegexp = /^\.\/endpoints(\/.*)\.(post|get|put|delete|use|helper)\.js$/;
+const defaultRegexp = /^\.\/endpoints(\/.*)\.(post|get|put|delete|use|helper|test)\.js$/;
 const defaultPath = './endpoints/**/*.js'
+
+const skip = new Set(['helper', 'test']);
 
 export default async function dynamicEndpoints (router, { path = defaultPath, regexp = defaultRegexp } = {}) {
   const files = glob.sync(path);
@@ -22,7 +24,7 @@ export default async function dynamicEndpoints (router, { path = defaultPath, re
     }
     const [, route, method] = match;
 
-    if (method === 'helper') {
+    if (skip.has(method)) {
       continue;
     }
 

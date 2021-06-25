@@ -5,11 +5,12 @@ Adidas NodeJs backend challenge - January 2021
 
 System is composed of four microservices:
 
-* PublicAPI: Backend for Frontend microservice to be used by UI frontend
-* PrivateAPI: Backend for admin microservice to be used by UI admin
-* Subscription: Microservice imprementing subscription logic, including persistence of subscription data inmongo, and email notification to confirm process is completed.
-* Mailer: microservice mocking email notifications. 
+* public-api: Backend for Frontend microservice to be used by UI frontend
+* private-api: Backend for admin microservice to be used by UI admin
+* subscription: Microservice imprementing subscription logic, including persistence of subscription data inmongo, and email notification to confirm process is completed.
+* mailer: microservice mocking email notifications. 
 
+It uses mongodb for persistance, and kafka for batching emails
 ## Provided Operations:
 
 * create new subscription
@@ -60,4 +61,22 @@ yarn getToken admin
 yarn getToken foo@bar.buz
 ```
 
-  
+## Running Tests
+
+To run tests, run the following command
+
+```bash
+  yarn test
+```
+
+To run all unit tests in whatch mode
+
+```bash
+  yarn test:ci --watch
+```
+
+To run unit test of only one service
+
+```bash
+  yarn workspace private-api test --watch
+```

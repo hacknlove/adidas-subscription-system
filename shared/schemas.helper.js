@@ -16,7 +16,17 @@ const schemaNewsletterAndEmail = {
         },
         email: {
           type: 'string',
-          format: 'email'
+          // format: 'email' // Error: unknown format &quot;email&quot
+          pattern: '^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$'// from https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address, while the format: 'email' bug is not fixed: 
+        }
+      }
+    },
+    query: {
+      type: 'object',
+      additionalProperties: false,
+      properties: {
+        jwt: {
+          type: 'string'
         }
       }
     }

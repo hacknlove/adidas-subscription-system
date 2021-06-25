@@ -10,10 +10,13 @@
     "jsonwebtoken": "^8.5.1"
   },
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
   },
   "type": "module",
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "jest": "^27.0.5",
+    "nodemon": "^2.0.7",
+    "supertest": "^6.1.3"
   }
 }

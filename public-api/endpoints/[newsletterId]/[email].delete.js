@@ -1,5 +1,5 @@
-import authentication from 'public/lib/authentication.js';
-import { validationNewsletterEmail } from './schemas.helper.js'
+import authentication from 'shared/authentication.js';
+import { validationNewsletterEmail } from 'shared/schemas.helper.js'
 import pipeFetchFactory from 'shared/pipeFetch.js';
 
 export default [

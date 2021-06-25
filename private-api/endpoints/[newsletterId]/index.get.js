@@ -1,4 +1,4 @@
-import authentication from 'public/lib/authentication.js';
+import authentication from 'shared/authentication.js';
 import pipeFetchFactory from 'shared/pipeFetch.js';
 import validationFactory from 'shared/validation.js';
 
@@ -17,6 +17,15 @@ const schema = {
           pattern: '^[0-9a-f]{24}$'
         },
       }
+    },
+    query: {
+      type: 'object',
+      additionalProperties: false,
+      properties: {
+        jwt: {
+          type: 'string'
+        }
+      }
     }
   }
 }
@@ -24,6 +33,6 @@ const schema = {
 export default [
   validationFactory(schema),
   authentication,
-  pipeFetchFactory(req => [`${process.env.SUBSCRIPTION_URL}/${req.params.newsletterId}/${req.params.email}`])
+  pipeFetchFactory(req => [`${process.env.SUBSCRIPTION_URL}/${req.params.newsletterId}`])
 ]
 

@@ -1,4 +1,4 @@
-import authentication from 'public/lib/authentication.js';
+import authentication from 'shared/authentication.js';
 import pipeFetchFactory from 'shared/pipeFetch.js';
 
 export default [
