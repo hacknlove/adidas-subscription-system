@@ -1,5 +1,6 @@
 import validationFactory from 'shared/validation.js';
 import pipeFetchFactory from 'shared/pipeFetch.js';
+import { newsletterId, email, queryJWT  } from 'shared/schemas.helper.js'
 
 const schema = {
   type: 'object',
@@ -24,7 +25,7 @@ const schema = {
         },
         consent: {
           type: "boolean",
-          const: "true"
+          const: true
         },
       }
     },
@@ -33,16 +34,11 @@ const schema = {
       required: ['newsletterId', 'email'],
       additionalProperties: false,
       properties: {
-        newsletterId: {
-          type: 'string',
-          pattern: '^[0-9a-f]{24}$'
-        },
-        email: {
-          type: 'string',
-          format: 'email'
-        }
+        newsletterId,
+        email
       }
-    }
+    },
+    query: queryJWT
   }
 }
 

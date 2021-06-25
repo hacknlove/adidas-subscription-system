@@ -1,6 +1,8 @@
 import Ajv from 'ajv';
+import addFormats from "ajv-formats"
 
 const ajv = new Ajv();
+addFormats(ajv)
 
 function isNotEmpty (obj) {
   if (!obj) {
@@ -23,7 +25,7 @@ export default function validationFactory (schema) {
     const valid = ajv.validate(schema, data)
 
     if (!valid) {
-      res.status(400).json({
+      return res.status(400).json({
         validationError: true,
         error: ajv.errors
       })
