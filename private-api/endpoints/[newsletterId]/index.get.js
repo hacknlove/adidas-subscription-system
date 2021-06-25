@@ -1,3 +1,13 @@
+/**
+ * @api {get} /[newsletterId] Get subscriptions for one newsletter
+ * @apiName getNewsletterSubscriptions
+ * @apiDescription Returns an array with the subscriptions of the expecified newsletter
+ * @apiGroup Subscription
+ * @apiVersion 1.0.0
+ * @apiUse newsletterId
+ * @apiUse Authorization
+*/
+
 import authentication from 'shared/authentication.js';
 import pipeFetchFactory from 'shared/pipeFetch.js';
 import validationFactory from 'shared/validation.js';

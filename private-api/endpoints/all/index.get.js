@@ -1,3 +1,12 @@
+/**
+ * @api {get} /all Get all subscriptions
+ * @apiName getAllSubscriptions
+ * @apiDescription Returns an array with all the subscriptions
+ * @apiGroup Subscription
+ * @apiVersion 1.0.0
+ * @apiUse Authorization
+*/
+
 import authentication from 'shared/authentication.js';
 import pipeFetchFactory from 'shared/pipeFetch.js';
 import validationFactory from 'shared/validation.js';
