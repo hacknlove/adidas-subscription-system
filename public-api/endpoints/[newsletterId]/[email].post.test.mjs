@@ -10,7 +10,7 @@ app.post('/:newsletterId/:email', ...controller)
 process.env.JWT_SECRET = 'test'
 process.env.SUBSCRIPTION_URL = 'fetch-echo'
 
-describe('Create subscription', () => {
+describe('POST /[newsletterId]/[email]', () => {
   it('errors if missing consent', () => request(app)
     .post(`/${'0'.repeat(24)}/foo@bar.buz?jwt=${jwt.sign({ sub: 'foo@bar.buz' }, process.env.JWT_SECRET)}`)
     .send({

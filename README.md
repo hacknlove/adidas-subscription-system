@@ -5,7 +5,7 @@ Adidas NodeJs backend challenge - January 2021
 
 System is composed of four microservices:
 
-* public-api: Backend for Frontend microservice to be used by UI frontend
+* [public-api](/public-api/README.md): Backend for Frontend microservice to be used by UI frontend
 * private-api: Backend for admin microservice to be used by UI admin
 * subscription: Microservice imprementing subscription logic, including persistence of subscription data inmongo, and email notification to confirm process is completed.
 * mailer: microservice mocking email notifications. 

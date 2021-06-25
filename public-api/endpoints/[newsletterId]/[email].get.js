@@ -1,7 +1,7 @@
 /**
- * @api {delete} /[newsletterId]/[email] Cancel Subscriptiption
- * @apiName cancelSubscription
- * @apiDescription It checks the permisions, validate the parameters, and send a request to the subscription service and pipes the response back 
+ * @api {get} /[newsletterId]/[email] Verify Email
+ * @apiName verifyEmail
+ * @apiDescription This is the url that is linked on the verification email that is sent to every user to verify his email address
  * @apiGroup Subscription
  * @apiVersion 1.0.0
  * @apiUse newsletterId
@@ -35,5 +35,5 @@ const schema = {
 export default [
   validationFactory(schema),
   authentication,
-  pipeFetchFactory(req => [`${process.env.SUBSCRIPTION_URL}/${req.params.newsletterId}/${req.params.email}`, { method: 'DELETE' }])
+  pipeFetchFactory(req => [`${process.env.SUBSCRIPTION_URL}/${req.params.newsletterId}/${req.params.email}/validate`, { method: 'POST' }])
 ]

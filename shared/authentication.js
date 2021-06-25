@@ -6,6 +6,7 @@ export default function authentication(req, res, next) {
   try {
     const parsed = jwt.verify(auth.replace(/^bearer /, ''), process.env.JWT_SECRET)
     if (parsed.sub === 'admin' || parsed.sub === req.params?.email ) {
+      req.jwt = parsed;
       return next();
     }
     throw new Error('not allowed')  
