@@ -7,7 +7,6 @@ services:
     ports:
       - 17017:27017
 
-
   zookeeper:
     image: docker.io/bitnami/zookeeper:3.7
     ports:
@@ -31,6 +30,8 @@ services:
       dockerfile: docker/dev/Dockerfile
     volumes:
       - ../../:/home/node/app
+    depends_on:
+      - kafka
     command: yarn workspace mailer dev
     environment:
       PORT: 80
@@ -44,6 +45,7 @@ services:
       - ../../:/home/node/app
     depends_on:
       - mongo
+      - kafka
 
     command: yarn workspace subscription dev
     environment:
@@ -83,3 +85,10 @@ services:
       MAILER: ${MAILER_URL}
       JWT_SECRET: ${JWT_SECRET}
 
+  test:
+    image: adidas-subscription-dev
+    build:
+      context: ../../
+      dockerfile: docker/dev/Dockerfile
+      volumes:
+        - ../../:/home/node/app
