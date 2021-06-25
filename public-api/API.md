@@ -30,7 +30,7 @@ DELETE /[newsletterId]/[email]
 |---------|-----------|--------------------------------------|
 | Authorization | `String` | **optional**<p>&quot;bearer &quot; + authentication token.</p> <p>Alternatively a cookie named jwt or query parameter named jwt can be used to send the authentication token at your convenience.</p> |
 
-### Parameters - `param`
+### Parameters - `path`
 
 | Name     | Type       | Description                           |
 |----------|------------|---------------------------------------|
@@ -55,7 +55,7 @@ POST /[newsletterId]/[email]
 | birthDate | `string` | <p>birth date of the user</p> <p>Any string that can be parsed by <code>new Date(birthDate)</code> will work</p> |
 | consent | `boolen` | **optional** <p>Does the user consent? Only <code>true</code> is accepted</p> |
 
-### Parameters - `param`
+### Parameters - `path`
 
 | Name     | Type       | Description                           |
 |----------|------------|---------------------------------------|
@@ -77,7 +77,7 @@ GET /[newsletterId]/[email]
 |---------|-----------|--------------------------------------|
 | Authorization | `String` | **optional**<p>&quot;bearer &quot; + authentication token.</p> <p>Alternatively a cookie named jwt or query parameter named jwt can be used to send the authentication token at your convenience.</p> |
 
-### Parameters - `param`
+### Parameters - `path`
 
 | Name     | Type       | Description                           |
 |----------|------------|---------------------------------------|
