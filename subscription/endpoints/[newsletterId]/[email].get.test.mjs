@@ -22,7 +22,6 @@ describe(scenario.scenario, () => {
       gender: 'F',
       birthDate: '2000-01-02',
       consent: true,
-      scenario,
     });
 
     return request(app)
@@ -37,7 +36,6 @@ describe(scenario.scenario, () => {
             gender: 'F',
             birthDate: '2000-01-02',
             consent: true,
-            scenario,
           },
         );
       });

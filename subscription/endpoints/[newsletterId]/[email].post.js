@@ -48,7 +48,6 @@ export default async function addSubscription(req, res) {
   if (update.error || update.ok !== 1) {
     console.error(update.error ?? update.lastErrorObject);
     return res.status(500).json({
-      internalError: true,
       error: update.error ?? update.lastErrorObject,
     });
   }

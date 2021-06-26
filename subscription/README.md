@@ -50,8 +50,3 @@ Install with yarn from the workspaces root folder
 `KAFKA_URL` Where to find kafka
 
 `JWT_SECRET` the secret used to sign the json web tokens
-
-`CACHE_EXPIRY_MS` mongo responses are cached for this amount of milliseconds
-
-`REVALIDATE_CACHE_MS` cached requests revalidation are throttled 
-

@@ -14,11 +14,28 @@ import seedrandom from 'seedrandom';
 export default class Scenario {
   constructor(scenario) {
     beforeAll(() => mongoProxy.waitFor);
-    beforeAll(() => mongoProxy.subscriptions.deleteMany({ scenario }));
-    afterEach(() => mongoProxy.subscriptions.deleteMany({ scenario }));
+    afterEach(() => mongoProxy.subscriptions.deleteMany({
+      $or: [
+        {
+          _id: { $in: this.usedIdes },
+        },
+        {
+          newsletterId: { $in: this.usedIdes },
+        },
+        {
+          email: { $in: this.usedEmails },
+        },
+
+      ],
+    }));
     afterAll(async () => {
       await mongoProxy.client.close();
     });
+
+    this.usedIdes = [];
+    this.usedEmails = [];
+
+    this.scenario = scenario;
 
     const rng = seedrandom(scenario);
     this.prefix = Math.abs(rng.int32()).toString(16) + Math.abs(rng.int32()).toString(16);
@@ -26,7 +43,9 @@ export default class Scenario {
   }
 
   objectId() {
-    return ObjectId(`${this.prefix}${(this.i++).toString(16)}${'0'.repeat(24)}`.substr(0, 24));
+    const o = ObjectId(`${this.prefix}${(this.i++).toString(16)}${'0'.repeat(24)}`.substr(0, 24));
+    this.usedIdes.push(o);
+    return o;
   }
 
   objectIds(howMany) {
@@ -34,7 +53,9 @@ export default class Scenario {
   }
 
   email() {
-    return `${this.prefix}${(this.i++).toString(16)}@example.test`;
+    const e = `${this.prefix}${(this.i++).toString(16)}@example.test`;
+    this.usedEmails.push(e);
+    return e;
   }
 
   emails(howMany) {

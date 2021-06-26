@@ -26,7 +26,6 @@ describe(scenario.scenario, () => {
         firstName: 'foo',
         gender: 'X',
         birthDate: '2000-01-01',
-        scenario,
       },
     );
 
@@ -51,7 +50,6 @@ describe(scenario.scenario, () => {
         firstName: 'john',
         birthDate: '1970-01-01',
         gender: 'M',
-        scenario,
       },
     );
   });
@@ -66,7 +64,6 @@ describe(scenario.scenario, () => {
         firstName: 'john',
         birthDate: '1970-01-01',
         gender: 'M',
-        scenario,
       })
       .then(async (res) => {
         const subscription = await mongoProxy.subscriptions.findOne({ email });
@@ -81,7 +78,6 @@ describe(scenario.scenario, () => {
             firstName: 'john',
             birthDate: '1970-01-01',
             gender: 'M',
-            scenario,
           },
         );
       });

@@ -23,7 +23,6 @@ describe(scenario.scenario, () => {
         gender: 'M',
         birthDate: '2000-01-01',
         consent: true,
-        scenario,
       },
       {
         _id: subscription2,
@@ -33,7 +32,6 @@ describe(scenario.scenario, () => {
         gender: 'F',
         birthDate: '2000-01-02',
         consent: true,
-        scenario,
       },
       {
         _id: subscription3,
@@ -43,7 +41,6 @@ describe(scenario.scenario, () => {
         gender: 'F',
         birthDate: '2000-01-03',
         consent: true,
-        scenario,
       },
     ]);
 
@@ -51,7 +48,22 @@ describe(scenario.scenario, () => {
       .get(`/${newsletter2.toHexString()}`)
       .then((res) => {
         expect(res.body).toEqual([
-          email2, email3,
+          {
+            _id: subscription2.toHexString(),
+            email: email2,
+            firstName: 'bar',
+            gender: 'F',
+            birthDate: '2000-01-02',
+            consent: true,
+          },
+          {
+            _id: subscription3.toHexString(),
+            email: email3,
+            firstName: 'bar',
+            gender: 'F',
+            birthDate: '2000-01-03',
+            consent: true,
+          },
         ]);
       });
   });
