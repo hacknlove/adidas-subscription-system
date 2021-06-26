@@ -9,6 +9,10 @@
     "@shelf/jest-mongodb": "^1.2.5",
     "apidoc": "^0.28.1",
     "apidoc-markdown": "^5.2.3",
+    "eslint": "^7.29.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jest": "^24.3.6",
     "jest": "^27.0.5",
     "nodemon": "^2.0.7",
     "seedrandom": "^3.0.5",
@@ -17,10 +21,16 @@
   "scripts": {
     "dev": "nodemon index.js",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
-    "apidoc": "apidoc -e node_modules -e ./doc ; apidoc-markdown -p ./doc -o ./API.md ; rm -r ./doc"
+    "apidoc": "apidoc -e node_modules -e ./doc ; apidoc-markdown -p ./doc -o ./API.md ; rm -r ./doc",
+    "lint": "eslint --ext .js,.mjs,.cjs ./ "
   },
   "dependencies": {
+    "express": "^4.17.1",
     "kafkajs": "^1.15.0",
     "mongodb": "^3.6.9"
-  }
+  },
+  "bundledDependencies": [
+    "shared",
+    "subscription"
+  ]
 }

@@ -26,7 +26,6 @@ let maxTries;
 const mongoProxy = new Proxy(mongo, mongoHandler);
 
 async function mongoConnect() {
-  console.log('connecting to mongo', maxTries)
   const client = await MongoClient.connect(mongoURL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -34,6 +33,7 @@ async function mongoConnect() {
 
   if (client.err) {
     if (maxTries--) {
+      console.log('connecting to mongo', maxTries)
       mongoConnect();
       return;
     }

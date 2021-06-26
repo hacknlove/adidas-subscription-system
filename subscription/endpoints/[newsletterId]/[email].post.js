@@ -1,27 +1,32 @@
 import mongoProxy, { ObjectId } from 'shared/mongo.js';
 
-export default async function addSubscription (req, res) {
-  await mongoProxy.waitFor
+export default async function addSubscription(req, res) {
+  const newsletterId = ObjectId(req.params.newsletterId);
+  await mongoProxy.waitFor;
 
-  const update = await mongoProxy.subscriptions.updateOne({
-    newsletterId: ObjectId(req.params.newsletterId),
-    email: req.params.email
+  const update = await mongoProxy.subscriptions.findOneAndUpdate({
+    email: req.params.email,
   }, {
     $set: {
-      ...req.body
-    }
+      ...req.body,
+    },
+    $addToSet: {
+      newsletterId,
+    },
   }, {
-    upsert: true
-  }).catch(error => ({ error }));
+    upsert: true,
+    projection: {
+      _id: 1,
+    },
+  }).catch((error) => ({ error }));
 
-  if (update.error) {
-    return res.status(500).json({ internalError: true, error: update.error })
+  if (update.error || update.ok !== 1) {
+    console.error(update.error ?? update.lastErrorObject);
+    return res.status(500).json({
+      internalError: true,
+      error: update.error ?? update.lastErrorObject,
+    });
   }
 
-  res.status(200).json({
-    matchedCount: update.matchedCount,
-    modifiedCount: update.modifiedCount,
-    upsertedCount: update.upsertedCount,
-    upsertedId: update.upsertedId,
-  })
+  res.status(200).json({ subscriptionId: update.value?._id ?? update.lastErrorObject.upserted });
 }

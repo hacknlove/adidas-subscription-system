@@ -2,7 +2,7 @@
  * @api {get} /[newsletterId] Get subscriptions for one newsletter
  * @apiName getNewsletterSubscriptions
  * @apiDescription Returns an array with the subscriptions of the expecified newsletter
- * 
+ *
  * The result is cached for CACHE_EXPIRY_MS miliseconds
  * Request to mongo are throttled by REVALIDATE_CACHE_MS milliseconds
  * @apiGroup Subscription
@@ -17,27 +17,29 @@ const getNewsletterSubscriptionsCached = cachedPromise(
   async (newsletterId) => {
     await mongoProxy.waitFor;
 
-    const response = (await mongoProxy.subscriptions.find({
+    const response = await mongoProxy.subscriptions.find({
       newsletterId: ObjectId(newsletterId),
-    }, { projection: { _id: 1 }}).toArray().catch(error => ({ error, $dontCache: true })))
+    }, { projection: { email: 1, _id: 0 } })
+      .toArray()
+      .catch((error) => ({ error, $dontCache: true }));
 
     if (response.error) {
-      return response
+      return response;
     }
 
-    return response.map(({ _id }) => _id)
+    return response.map(({ email }) => email);
   },
   {
     expiry: 6000,
-  }
+  },
 );
 
-export default async function getNewsletterSubscriptions (req, res) {
+export default async function getNewsletterSubscriptions(req, res) {
   const subscriptions = await getNewsletterSubscriptionsCached(req.params.newsletterId);
 
   if (subscriptions.error) {
-    return res.status(500).json({ internalError: true, error: update.error })
+    return res.status(500).json({ internalError: true, error: subscriptions.error });
   }
 
-  res.status(200).json(subscriptions)
+  res.status(200).json(subscriptions);
 }

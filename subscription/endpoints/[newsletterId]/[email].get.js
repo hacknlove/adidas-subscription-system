@@ -1,25 +1,20 @@
-import mongoProxy from 'shared/mongo.js';
+import mongoProxy, { ObjectId } from 'shared/mongo.js';
 
-const getSubscriptionsCached = cachedPromise(
-  async (newsletterId, email) => {
-    await mongoProxy.waitFor;
+export default async function getSubscription(req, res) {
+  await mongoProxy.waitFor;
 
-    return await mongoProxy.subscriptions.findOne({
-      newsletterId: ObjectId(newsletterId),
-      email
-    }).catch(error => ({ error, $dontCache: true }));
-  },
-  {
-    expiry: 6000,
-  }
-);
+  const subscription = await mongoProxy.subscriptions.findOne({
+    newsletterId: ObjectId(req.params.newsletterId),
+    email: req.params.email,
+  }).catch((error) => ({ error, $dontCache: true }));
 
-export default async function getSubscription (req, res) {
-  const subscription = await getSubscriptionsCached(ObjectId(req.params.newsletterId), req.params.email);
-
-  if (update.error) {
-    return res.status(500).json({ internalError: true, error: update.error })
+  if (!subscription) {
+    return res.status(404).json({ notFound: true });
   }
 
-  res.status(200).json(subscription)
+  if (subscription.error) {
+    return res.status(500).json({ internalError: true, error: subscription.error });
+  }
+
+  res.status(200).json(subscription);
 }
