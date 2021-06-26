@@ -1,6 +1,7 @@
 import request from 'supertest';
 import express from 'express';
 import jwt from 'jsonwebtoken';
+import queueEmail from 'mailer/sdk/queueEmail';
 import controller from './[email].post.js';
 
 const app = express();
@@ -14,32 +15,29 @@ describe('POST /[newsletterId]/[email]', () => {
   it('errors if missing consent', () => request(app)
     .post(`/${'0'.repeat(24)}/foo@bar.buz?jwt=${jwt.sign({ sub: 'foo@bar.buz' }, process.env.JWT_SECRET)}`)
     .send({
-      firstName: 'john',
-      birthDate: '1970-01-01',
-      gender: 'M',
+      templateId: '1'.repeat(24),
+      consent: false,
     })
     .then((res) => {
       expect(true).toBe(true);
       expect(res.body.validationError).toBe(true);
     }));
 
-  it('pipes the request to the right microservice and endpont', () => request(app)
-    .post(`/${'0'.repeat(24)}/foo@bar.buz?jwt=${jwt.sign({ sub: 'foo@bar.buz' }, process.env.JWT_SECRET)}`)
-    .send({
-      firstName: 'john',
-      birthDate: '1970-01-01',
-      consent: true,
-      gender: 'M',
-    })
-    .then((res) => {
-      const [url, options] = JSON.parse(res.text);
-      expect(url).toBe('fetch-echo/000000000000000000000000/foo@bar.buz');
-      expect(options.method).toBe('POST');
-      expect(JSON.parse(options.body)).toEqual({
-        firstName: 'john',
-        birthDate: '1970-01-01',
+  it('pipes the request to the right microservice and endpont', async () => {
+    await request(app)
+      .post(`/${'0'.repeat(24)}/foo@bar.buz`)
+      .send({
+        templateId: '1'.repeat(24),
         consent: true,
-        gender: 'M',
+        templateParams: {
+          foo: true,
+        },
+      })
+      .then((res) => {
+        expect(res.body).toEqual({ sent: true });
       });
-    }));
+    expect(queueEmail).toHaveBeenCalled();
+
+    expect(queueEmail.mock.calls[0][0]).toHaveProperty('templateParams.token');
+  });
 });

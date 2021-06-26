@@ -1,9 +1,6 @@
 /**
- * @apiDefine Authorization
- * @apiHeader {String} [Authorization] "bearer " + authentication token.
- *
- * Alternatively a cookie named jwt or query parameter named jwt
- * can be used to send the authentication token at your convenience.
+ * @apiDefine token
+ * @apiParam (path) {String} token authentication token.
  */
 
 /**

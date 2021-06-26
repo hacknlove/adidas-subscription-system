@@ -3,6 +3,45 @@
 
 This exposes endpoints for the public operations, meaning operations that are meant to be done by regular users out in the wild.
 
+## Operations - flows:
+
+### New subscription
+
+The user POSTs to `/[newsletterId]/[email]`, with the body
+```
+{
+  templateId: ObjectId,
+  templateParams: object
+}
+```
+
+if the subscription exists it ends returning `{ exists: 1 }`
+
+An verification email is queued with template params:
+
+```
+{
+  ...templateParams,
+    token: SOME-JWT,
+}
+``` 
+
+The mailer service sends the email, which should include a link with the token
+
+When the user follows the link, the frontend renders a verification form where the user enters name, age, etc.
+
+On submit the frontend POSTS to `/[newsletterId]/[email]/[token]` with the subscription fields on the body
+
+public-api verifies it and send it to subscription service, (who creates the subscription), and returns the subscriptionId
+
+### CancelId
+
+Newsletter email templates should render a cancelation link using the templateParam `cancelToken`
+
+This link should take the user to the frontend where he could be prompted why he cancels and asked to confirm.
+
+If the user continues, the front DELETEs `/[newsletterId]/[email]/[token]`
+
 ## API documentation
 [API](./API.md)
 
