@@ -12,7 +12,7 @@
 import authentication from 'shared/authentication.js';
 import pipeFetchFactory from 'shared/pipeFetch.js';
 import validationFactory from 'shared/validation.js';
-import { newsletterId, email, queryJWT  } from 'shared/schemas.helper.js'
+import { newsletterId, email, queryJWT } from 'shared/schemas.helper.js';
 
 const schema = {
   type: 'object',
@@ -25,16 +25,15 @@ const schema = {
       additionalProperties: false,
       properties: {
         newsletterId,
-        email
-      }
+        email,
+      },
     },
-    query: queryJWT
-  }
-}
+    query: queryJWT,
+  },
+};
 
 export default [
   validationFactory(schema),
   authentication,
-  pipeFetchFactory(req => [`${process.env.SUBSCRIPTION_URL}/${req.params.newsletterId}/${req.params.email.toLowerCase()}`])
-]
-
+  pipeFetchFactory((req) => [`${process.env.SUBSCRIPTION_URL}/${req.params.newsletterId}/${req.params.email.toLowerCase()}`]),
+];

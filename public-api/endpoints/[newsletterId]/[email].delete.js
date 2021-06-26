@@ -1,7 +1,8 @@
 /**
  * @api {delete} /[newsletterId]/[email] Cancel Subscriptiption
  * @apiName cancelSubscription
- * @apiDescription It checks the permisions, validate the parameters, and send a request to the subscription service and pipes the response back 
+ * @apiDescription It checks the permisions, validate the parameters,
+ * and send a request to the subscription service and pipes the response back
  * @apiGroup Subscription
  * @apiVersion 1.0.0
  * @apiUse newsletterId
@@ -12,7 +13,7 @@
 import validationFactory from 'shared/validation.js';
 import authentication from 'shared/authentication.js';
 import pipeFetchFactory from 'shared/pipeFetch.js';
-import { newsletterId, email, queryJWT  } from 'shared/schemas.helper.js'
+import { newsletterId, email, queryJWT } from 'shared/schemas.helper.js';
 
 const schema = {
   type: 'object',
@@ -25,15 +26,15 @@ const schema = {
       additionalProperties: false,
       properties: {
         newsletterId,
-        email
-      }
+        email,
+      },
     },
-    query: queryJWT
-  }
-}
+    query: queryJWT,
+  },
+};
 
 export default [
   validationFactory(schema),
   authentication,
-  pipeFetchFactory(req => [`${process.env.SUBSCRIPTION_URL}/${req.params.newsletterId}/${req.params.email}`, { method: 'DELETE' }])
-]
+  pipeFetchFactory((req) => [`${process.env.SUBSCRIPTION_URL}/${req.params.newsletterId}/${req.params.email}`, { method: 'DELETE' }]),
+];
