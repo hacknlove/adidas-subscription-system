@@ -1,7 +1,7 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import request from 'supertest';
-import getNewsletterSubscriptions from 'subscription/sdk/getNewsletterSubscriptions';
+import getNewsletterSubscriptions from 'subscription/sdk/getNewsletterSubscriptions.js';
 import controller from './index.get.js';
 
 const app = express();

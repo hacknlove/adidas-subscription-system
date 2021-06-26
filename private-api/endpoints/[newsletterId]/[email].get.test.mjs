@@ -13,7 +13,7 @@ process.env.SUBSCRIPTION_URL = 'fetch-echo';
 describe('GET /[newsletterId]/[email]', () => {
   it('calls subscription sdk getSubscriptionDetails', async () => {
     await request(app)
-      .get(`/${'0'.repeat(24)}/Foo@bar.Buz?jwt=${jwt.sign({ sub: 'admin', iss: '0'.repeat(24) }, process.env.JWT_SECRET)}`)
+      .get(`/${'0'.repeat(24)}/Foo@bar.Buz?jwt=${jwt.sign({ sub: 'Foo@bar.Buz', iss: '0'.repeat(24) }, process.env.JWT_SECRET)}`)
       .then((res) => {
         expect(res.body).toEqual({ test: true });
       });

@@ -10,7 +10,7 @@
 import authentication from 'shared/authentication.js';
 import validationFactory from 'shared/validation.js';
 import { queryJWT } from 'shared/schemas.helper.js';
-import getAll from 'subscription/sdk/getAll';
+import getAll from 'subscription/sdk/getAll.js';
 
 const schema = {
   type: 'object',

@@ -23,7 +23,7 @@ import validationFactory from 'shared/validation.js';
 import {
   objectId, email, queryJWT, jwt,
 } from 'shared/schemas.helper.js';
-import createSubscription from 'subscription/sdk/createSubscription';
+import createSubscription from 'subscription/sdk/createSubscription.js';
 import authentication from 'shared/authentication.js';
 
 const schema = {

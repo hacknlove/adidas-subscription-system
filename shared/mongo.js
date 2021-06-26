@@ -33,7 +33,7 @@ async function mongoConnect() {
 
   if (client.err) {
     if (maxTries--) {
-      console.log('connecting to mongo', maxTries)
+      console.log('connecting to mongo', maxTries);
       mongoConnect();
       return;
     }
@@ -60,4 +60,4 @@ reconnect();
 
 export default mongoProxy;
 
-export const ObjectId =  mongodb.default.ObjectId;
+export const { ObjectId } = mongodb.default;

@@ -1,0 +1,237 @@
+[
+  {
+    "requests": [
+      {
+        "url": "http://localhost:8000",
+        "path": "/000000000000000000000000/foo@bar.buz",
+        "method": "POST",
+        "auth": "None",
+        "httpUser": "",
+        "httpPassword": "",
+        "passwordFieldType": "password",
+        "bearerToken": "",
+        "headers": [],
+        "params": [],
+        "bodyParams": [
+          {
+            "active": true,
+            "key": "templateId",
+            "value": "000000000000000000000000"
+          },
+          {
+            "active": true,
+            "key": "consent",
+            "value": true
+          }
+        ],
+        "rawParams": "{\n  \"templateId\": \"000000000000000000000000\",\n  \"consent\": true\n}",
+        "rawInput": true,
+        "contentType": "application/json",
+        "requestType": "",
+        "preRequestScript": "// pw.env.set('variable', 'value');",
+        "testScript": "// pw.expect('variable').toBe('value');",
+        "name": "create subscription first step"
+      },
+      {
+        "url": "http://localhost:8000",
+        "path": "/000000000000000000000000/foo@bar.buz/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmb29AYmFyLmJ1eiIsImV4cGlyZXNJbiI6IjFkIiwiaXNzIjoiMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwIiwiaWF0IjoxNjI0NzMyNjY4fQ.NegUPQHE3Jom0AR_j52u6cvfyIf3C_XIEwNVfEr8czQ",
+        "method": "POST",
+        "auth": "None",
+        "httpUser": "",
+        "httpPassword": "",
+        "passwordFieldType": "password",
+        "bearerToken": "",
+        "headers": [],
+        "params": [],
+        "bodyParams": [
+          {
+            "active": true,
+            "key": "birthDate",
+            "value": "1999-12-31"
+          },
+          {
+            "active": true,
+            "key": "firstName",
+            "value": "Foo"
+          },
+          {
+            "active": true,
+            "key": "gender",
+            "value": "M"
+          }
+        ],
+        "rawParams": "{\n  \"birthDate\": \"1999-12-31\",\n  \"firstName\": \"Foo\",\n  \"gender\": \"M\"\n}",
+        "rawInput": true,
+        "contentType": "application/json",
+        "requestType": "",
+        "preRequestScript": "// pw.env.set('variable', 'value');",
+        "testScript": "// pw.expect('variable').toBe('value');",
+        "name": "create subscription second step"
+      },
+      {
+        "url": "http://localhost:8001",
+        "path": "/000000000000000000000000/foo@bar.buz",
+        "method": "GET",
+        "auth": "None",
+        "httpUser": "",
+        "httpPassword": "",
+        "passwordFieldType": "password",
+        "bearerToken": "",
+        "headers": [],
+        "params": [
+          {
+            "key": "jwt",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmb29AYmFyLmJ1eiIsImV4cGlyZXNJbiI6IjFkIiwiaXNzIjoiMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwIiwiaWF0IjoxNjI0NzMyNjY4fQ.NegUPQHE3Jom0AR_j52u6cvfyIf3C_XIEwNVfEr8czQ",
+            "active": true
+          }
+        ],
+        "bodyParams": [
+          {
+            "active": true,
+            "key": "birthDate",
+            "value": "1999-12-31"
+          },
+          {
+            "active": true,
+            "key": "firstName",
+            "value": "Foo"
+          },
+          {
+            "active": true,
+            "key": "gender",
+            "value": "M"
+          }
+        ],
+        "rawParams": "{\n  \"birthDate\": \"1999-12-31\",\n  \"firstName\": \"Foo\",\n  \"gender\": \"M\"\n}",
+        "rawInput": true,
+        "contentType": "application/json",
+        "requestType": "",
+        "preRequestScript": "// pw.env.set('variable', 'value');",
+        "testScript": "// pw.expect('variable').toBe('value');",
+        "name": "private - get subscription details"
+      },
+      {
+        "url": "http://localhost:8000",
+        "path": "/000000000000000000000000/foo@bar.buz/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmb29AYmFyLmJ1eiIsImV4cGlyZXNJbiI6IjFkIiwiaXNzIjoiMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwIiwiaWF0IjoxNjI0NzMyNjY4fQ.NegUPQHE3Jom0AR_j52u6cvfyIf3C_XIEwNVfEr8czQ",
+        "method": "DELETE",
+        "auth": "None",
+        "httpUser": "",
+        "httpPassword": "",
+        "passwordFieldType": "password",
+        "bearerToken": "",
+        "headers": [],
+        "params": [],
+        "bodyParams": [
+          {
+            "active": true,
+            "key": "birthDate",
+            "value": "1999-12-31"
+          },
+          {
+            "active": true,
+            "key": "firstName",
+            "value": "Foo"
+          },
+          {
+            "active": true,
+            "key": "gender",
+            "value": "M"
+          }
+        ],
+        "rawParams": "",
+        "rawInput": true,
+        "contentType": "application/json",
+        "requestType": "",
+        "preRequestScript": "// pw.env.set('variable', 'value');",
+        "testScript": "// pw.expect('variable').toBe('value');",
+        "name": "delete subscription"
+      },
+      {
+        "url": "http://localhost:8001",
+        "path": "/all",
+        "method": "GET",
+        "auth": "None",
+        "httpUser": "",
+        "httpPassword": "",
+        "passwordFieldType": "password",
+        "bearerToken": "",
+        "headers": [],
+        "params": [
+          {
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImlzcyI6Im5vbmUiLCJleHBpcmVzSW4iOiIxZCIsImlhdCI6MTYyNDczMzY1NX0.AOWjPcC5yLQ5HHr-fV7vKeiL2moODmhADxil15FdmUw",
+            "active": true,
+            "key": "jwt"
+          }
+        ],
+        "bodyParams": [
+          {
+            "active": true,
+            "key": "birthDate",
+            "value": "1999-12-31"
+          },
+          {
+            "active": true,
+            "key": "firstName",
+            "value": "Foo"
+          },
+          {
+            "active": true,
+            "key": "gender",
+            "value": "M"
+          }
+        ],
+        "rawParams": "{\n  \"birthDate\": \"1999-12-31\",\n  \"firstName\": \"Foo\",\n  \"gender\": \"M\"\n}",
+        "rawInput": true,
+        "contentType": "application/json",
+        "requestType": "",
+        "preRequestScript": "// pw.env.set('variable', 'value');",
+        "testScript": "// pw.expect('variable').toBe('value');",
+        "name": "private - get all"
+      },
+      {
+        "url": "http://localhost:8001",
+        "path": "/000000000000000000000000",
+        "method": "GET",
+        "auth": "None",
+        "httpUser": "",
+        "httpPassword": "",
+        "passwordFieldType": "password",
+        "bearerToken": "",
+        "headers": [],
+        "params": [
+          {
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImlzcyI6IjAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMCIsImV4cGlyZXNJbiI6IjFkIiwiaWF0IjoxNjI0NzM0MDcyfQ.cKB86rP401ItCNMaK88785ituxr4oj3ZuZAp06uKJdc",
+            "active": true,
+            "key": "jwt"
+          }
+        ],
+        "bodyParams": [
+          {
+            "active": true,
+            "key": "birthDate",
+            "value": "1999-12-31"
+          },
+          {
+            "active": true,
+            "key": "firstName",
+            "value": "Foo"
+          },
+          {
+            "active": true,
+            "key": "gender",
+            "value": "M"
+          }
+        ],
+        "rawParams": "{\n  \"birthDate\": \"1999-12-31\",\n  \"firstName\": \"Foo\",\n  \"gender\": \"M\"\n}",
+        "rawInput": true,
+        "contentType": "application/json",
+        "requestType": "",
+        "preRequestScript": "// pw.env.set('variable', 'value');",
+        "testScript": "// pw.expect('variable').toBe('value');",
+        "name": "private - get subscriptions from newsletter"
+      }
+    ],
+    "folders": [],
+    "name": "adidas"
+  }
+]

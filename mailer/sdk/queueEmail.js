@@ -1,14 +1,13 @@
-import send from 'mailer/lib/send';
+import send from 'mailer/lib/send.js';
 
 export default function queueEmail({ email, templateId, templateParams }) {
   return send({
     topic: 'send-email',
-    messages: [
+    data:
       {
         email,
         templateId,
         templateParams,
       },
-    ],
   });
 }

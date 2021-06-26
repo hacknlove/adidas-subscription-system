@@ -9,12 +9,14 @@ services:
 
   zookeeper:
     image: docker.io/bitnami/zookeeper:3.7
+    restart: always
     ports:
       - "2181:2181"
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
   kafka:
     image: docker.io/bitnami/kafka:2
+    restart: always
     ports:
       - "9092:9092"
     environment:
@@ -32,7 +34,7 @@ services:
       - ../../:/home/node/app
     command: yarn workspace mailer dev
     environment:
-      PORT: 80
+      KAFKA_URL: ${KAFKA_URL}
 
   subscription:
     image: adidas-subscription-dev
@@ -49,7 +51,7 @@ services:
       MONGO_URL: ${MONGO_URL}
       PORT: 80
 
-  publicAPI:
+  public-api:
     image: adidas-subscription-dev
     build:
       context: ../../
@@ -64,8 +66,9 @@ services:
     environment:
       SUBSCRIPTION_URL: ${SUBSCRIPTION_URL}
       JWT_SECRET: ${JWT_SECRET}
+      KAFKA_URL: ${KAFKA_URL}
 
-  privateAPI:
+  private-api:
     image: adidas-subscription-dev
     build:
       context: ../../

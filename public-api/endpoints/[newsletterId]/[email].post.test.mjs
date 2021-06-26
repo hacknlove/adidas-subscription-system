@@ -1,7 +1,7 @@
 import request from 'supertest';
 import express from 'express';
 import jwt from 'jsonwebtoken';
-import queueEmail from 'mailer/sdk/queueEmail';
+import queueEmail from 'mailer/sdk/queueEmail.js';
 import controller from './[email].post.js';
 
 const app = express();

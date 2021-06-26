@@ -11,7 +11,7 @@
 import authentication from 'shared/authentication.js';
 import validationFactory from 'shared/validation.js';
 import { objectId, queryJWT } from 'shared/schemas.helper.js';
-import getNewsletterSubscriptions from 'subscription/sdk/getNewsletterSubscriptions';
+import getNewsletterSubscriptions from 'subscription/sdk/getNewsletterSubscriptions.js';
 
 const schema = {
   type: 'object',

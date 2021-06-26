@@ -1,7 +1,7 @@
 import request from 'supertest';
 import express from 'express';
 import jwt from 'jsonwebtoken';
-import createSubscription from 'subscription/sdk/createSubscription';
+import createSubscription from 'subscription/sdk/createSubscription.js';
 import controller from './[token].post.js';
 
 const app = express();

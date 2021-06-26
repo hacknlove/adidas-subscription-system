@@ -14,7 +14,7 @@ import authentication from 'shared/authentication.js';
 import {
   objectId, email, queryJWT, jwt,
 } from 'shared/schemas.helper.js';
-import cancelSubscription from 'subscription/sdk/cancelSubscription';
+import cancelSubscription from 'subscription/sdk/cancelSubscription.js';
 
 const schema = {
   type: 'object',

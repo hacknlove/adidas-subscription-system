@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 
-export default async function existsSubscription(newsletterId, email) {
-  const response = await fetch(`${process.env.SUBSCRIPTION_URL}/${email}/${newsletterId}`)
+export default async function existsSubscription({ newsletterId, email }) {
+  const response = await fetch(`${process.env.SUBSCRIPTION_URL}/${newsletterId}/${email}`)
     .then((res) => res.json()).catch((error) => null({ error }));
 
   if (!response) {

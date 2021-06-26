@@ -4,11 +4,13 @@ import glob from 'glob';
 const cwd = process.cwd();
 
 const defaultRegexp = /^\.\/endpoints(\/.*)\.(post|get|put|delete|use|helper|test)\.js$/;
-const defaultPath = './endpoints/**/*.js'
+const defaultPath = './endpoints/**/*.js';
 
 const skip = new Set(['helper', 'test']);
 
-export default async function dynamicEndpoints (router, { path = defaultPath, regexp = defaultRegexp } = {}) {
+export default async function dynamicEndpoints(
+  router, { path = defaultPath, regexp = defaultRegexp } = {},
+) {
   const files = glob.sync(path);
   files.sort((a, b) => {
     const lastA = a.replace(/\/\[/g, '/￿'); // unicode ffff last character
@@ -16,6 +18,7 @@ export default async function dynamicEndpoints (router, { path = defaultPath, re
     return lastA < lastB ? -1 : 1;
   });
 
+  // eslint-disable-next-line no-restricted-syntax
   for (const file of files) {
     const match = file.match(regexp);
     if (!match) {
@@ -30,12 +33,11 @@ export default async function dynamicEndpoints (router, { path = defaultPath, re
 
     const { default: controller } = await import(resolve(cwd, file));
 
-
     const expressRoute = route.replace(
       /\/\[[a-z_]+\]/gi,
       (string) => `/:${string.substring(2, string.length - 1)}`,
     ).replace(/\/index$/, '');
-    
+
     if (controller) {
       console.info(`${method.toUpperCase()} /api${expressRoute}`);
 
@@ -44,11 +46,10 @@ export default async function dynamicEndpoints (router, { path = defaultPath, re
       } else if (typeof controller === 'function') {
         router[method](expressRoute, controller);
       } else {
-        console.warn(`Controller missing`);
+        console.warn('Controller missing');
       }
     } else {
       console.info(`${method.toUpperCase()} /api${expressRoute} missing controller`);
-
     }
   }
 }

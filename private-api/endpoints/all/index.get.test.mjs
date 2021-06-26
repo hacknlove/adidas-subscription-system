@@ -1,7 +1,7 @@
 import request from 'supertest';
 import express from 'express';
 import jwt from 'jsonwebtoken';
-import getAll from 'subscription/sdk/getAll';
+import getAll from 'subscription/sdk/getAll.js';
 import controller from './index.get.js';
 
 const app = express();
@@ -13,7 +13,7 @@ process.env.SUBSCRIPTION_URL = 'fetch-echo';
 describe('GET /all', () => {
   it('calls subscription sdk getAll', async () => {
     await request(app)
-      .get(`/?jwt=${jwt.sign({ sub: 'admin' }, process.env.JWT_SECRET)}`)
+      .get(`/?jwt=${jwt.sign({ sub: 'admin', iss: 'none' }, process.env.JWT_SECRET)}`)
       .then((res) => {
         expect(res.body).toEqual([{ test: true }]);
       });

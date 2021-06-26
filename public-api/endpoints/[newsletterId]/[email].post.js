@@ -16,8 +16,8 @@ import jwt from 'jsonwebtoken';
 
 import validationFactory from 'shared/validation.js';
 import { objectId, email } from 'shared/schemas.helper.js';
-import existsSubscription from 'subscription/sdk/existsSubscription';
-import queueEmail from 'mailer/sdk/queueEmail';
+import existsSubscription from 'subscription/sdk/existsSubscription.js';
+import queueEmail from 'mailer/sdk/queueEmail.js';
 
 const schema = {
   type: 'object',
@@ -55,14 +55,17 @@ const schema = {
 export default [
   validationFactory(schema),
   async function sendEmail(req, res) {
-    const exists = await existsSubscription(req.params.newsletterId, req.params.email);
+    const exists = await existsSubscription({
+      newsletterId: req.params.newsletterId,
+      email: req.params.email,
+    });
 
     if (exists) {
       return res.status(200).json({ exists: true });
     }
 
     await queueEmail({
-      email: req.email,
+      email: req.params.email,
       templateId: req.body.templateId,
       templateParams: {
         ...req.body.templateParams,
