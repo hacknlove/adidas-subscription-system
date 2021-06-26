@@ -9,9 +9,9 @@
 */
 
 import authentication from 'shared/authentication.js';
-import pipeFetchFactory from 'shared/pipeFetch.js';
 import validationFactory from 'shared/validation.js';
-import { newsletterId, queryJWT } from 'shared/schemas.helper.js';
+import { objectId, queryJWT } from 'shared/schemas.helper.js';
+import getNewsletterSubscriptions from 'subscription/sdk/getNewsletterSubscriptions';
 
 const schema = {
   type: 'object',
@@ -23,7 +23,7 @@ const schema = {
       required: ['newsletterId'],
       additionalProperties: false,
       properties: {
-        newsletterId,
+        newsletterId: objectId,
       },
     },
     query: queryJWT,
@@ -33,5 +33,15 @@ const schema = {
 export default [
   validationFactory(schema),
   authentication,
-  pipeFetchFactory((req) => [`${process.env.SUBSCRIPTION_URL}/${req.params.newsletterId}`]),
+  async function newsletterSubscriptions(req, res) {
+    const subscriptions = await getNewsletterSubscriptions({
+      newsletterId: req.params.newsletterId,
+    });
+
+    if (subscriptions.error) {
+      return res.status(500).json({ error: subscriptions.error });
+    }
+
+    return res.status(200).json(subscriptions);
+  },
 ];

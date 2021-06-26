@@ -10,9 +10,9 @@
 */
 
 import authentication from 'shared/authentication.js';
-import pipeFetchFactory from 'shared/pipeFetch.js';
 import validationFactory from 'shared/validation.js';
-import { newsletterId, email, queryJWT } from 'shared/schemas.helper.js';
+import { objectId, email, queryJWT } from 'shared/schemas.helper.js';
+import getSubscriptionDetails from 'subscription/sdk/getSubscriptionDetails.js';
 
 const schema = {
   type: 'object',
@@ -24,7 +24,7 @@ const schema = {
       required: ['newsletterId', 'email'],
       additionalProperties: false,
       properties: {
-        newsletterId,
+        newsletterId: objectId,
         email,
       },
     },
@@ -35,5 +35,20 @@ const schema = {
 export default [
   validationFactory(schema),
   authentication,
-  pipeFetchFactory((req) => [`${process.env.SUBSCRIPTION_URL}/${req.params.newsletterId}/${req.params.email.toLowerCase()}`]),
+  async function subscriptionDetails(req, res) {
+    const subscription = await getSubscriptionDetails({
+      newsletterId: req.params.newsletterId,
+      email: req.params.email.toLowerCase(),
+    });
+
+    if (!subscription) {
+      return res.status(404).json({ notFound: true });
+    }
+
+    if (subscription.error) {
+      return res.status(500).json({ error: subscription.error });
+    }
+
+    return res.status(200).json(subscription);
+  },
 ];
