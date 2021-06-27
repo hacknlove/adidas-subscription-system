@@ -1,0 +1,11 @@
+{
+  "name": "@adidas-subscription/public-sdk",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=14.0.0 "
+  },
+  "dependencies": {}
+}

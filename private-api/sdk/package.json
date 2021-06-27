@@ -1,0 +1,12 @@
+{
+  "name": "@adidas-subscription/private-sdk",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "type": "module",
+  "engines": { "node": ">=14.0.0 "},
+  "dependencies": {
+    "jsonwebtoken": "^8.5.1",
+    "node-fetch": "^2.6.1"
+  }
+}

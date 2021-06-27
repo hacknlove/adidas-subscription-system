@@ -33,7 +33,7 @@ async function mongoConnect() {
 
   if (client.err) {
     if (maxTries--) {
-      console.log('connecting to mongo', maxTries);
+      console.warn('connecting to mongo', maxTries);
       mongoConnect();
       return;
     }

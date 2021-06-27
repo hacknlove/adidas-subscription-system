@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "private": true,
+  "engines": { "node": ">=14.0.0 "},
   "dependencies": {
     "cookie-parser": "^1.4.5",
     "express": "^4.17.1"
@@ -11,7 +12,7 @@
   "scripts": {
     "dev": "nodemon index.js",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
-    "apidoc": "apidoc -e node_modules -e ./doc ; apidoc-markdown -p ./doc -o ./API.md ; rm -r ./doc",
+    "apidoc": "apidoc -e node_modules -e ./doc ; apidoc-markdown -p ./doc -o ../docs/private-api-rest-reference.md ; rm -r ./doc",
     "lint": "eslint --ext .js,.mjs,.cjs ./ "
   },
   "type": "module",

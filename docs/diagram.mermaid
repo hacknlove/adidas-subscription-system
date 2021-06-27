@@ -1,0 +1,25 @@
+%% https://https://github.com/mermaid-js/mermaid/
+
+graph LR
+subgraph Public Internet
+
+    PFSS(frontent serverside) 
+    ---|REST| PuAPI(public api)
+
+    PuAPI <-->|REST| S(subscription) 
+
+
+    subgraph private network fa:fa-lock
+
+        APSS(admin panel serverside) 
+        -->|REST| PrAPI(private api)
+
+        subgraph Subscription system 
+            PrAPI -->|REST| S(subscription) -->  Mong[/fa:fa-database MONGO\]
+
+            PuAPI -->|kafka| M(mailer) --> email{fa:fa-envelope Email}
+            PrAPI -->|kafka| M(mailer) 
+        end
+    end
+end
+

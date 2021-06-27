@@ -4,17 +4,19 @@ services:
     image: mongo
     logging:
       driver: none
-    ports:
-      - 17017:27017
+    volumes:
+      - ../../scripts:/scripts
 
   zookeeper:
     image: docker.io/bitnami/zookeeper:3.7
+    restart: always
     ports:
       - "2181:2181"
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
   kafka:
     image: docker.io/bitnami/kafka:2
+    restart: always
     ports:
       - "9092:9092"
     environment:
@@ -30,11 +32,9 @@ services:
       dockerfile: docker/dev/Dockerfile
     volumes:
       - ../../:/home/node/app
-    depends_on:
-      - kafka
     command: yarn workspace mailer dev
     environment:
-      PORT: 80
+      KAFKA_URL: ${KAFKA_URL}
 
   subscription:
     image: adidas-subscription-dev
@@ -45,14 +45,13 @@ services:
       - ../../:/home/node/app
     depends_on:
       - mongo
-      - kafka
 
     command: yarn workspace subscription dev
     environment:
       MONGO_URL: ${MONGO_URL}
       PORT: 80
 
-  publicAPI:
+  public-api:
     image: adidas-subscription-dev
     build:
       context: ../../
@@ -61,14 +60,14 @@ services:
       - ../../:/home/node/app
     depends_on:
       - subscription
-    ports: 
-      - 8000:8000
     command: yarn workspace public-api dev
     environment:
+      PORT: 80
       SUBSCRIPTION_URL: ${SUBSCRIPTION_URL}
       JWT_SECRET: ${JWT_SECRET}
+      KAFKA_URL: ${KAFKA_URL}
 
-  privateAPI:
+  private-api:
     image: adidas-subscription-dev
     build:
       context: ../../
@@ -77,18 +76,33 @@ services:
       - ../../:/home/node/app
     depends_on:
       - subscription
-    ports: 
-      - 8001:8000
     command: yarn workspace private-api dev
     environment:
+      PORT: 80
       SUBSCRIPTION_URL: ${SUBSCRIPTION_URL}
       MAILER: ${MAILER_URL}
       JWT_SECRET: ${JWT_SECRET}
 
-  test:
+
+
+  e2e:
     image: adidas-subscription-dev
     build:
       context: ../../
       dockerfile: docker/dev/Dockerfile
-      volumes:
-        - ../../:/home/node/app
+    volumes:
+      - ../../:/home/node/app
+    depends_on:
+      - public-api
+      - private-api
+
+    command: yarn workspace e2e test --watch
+    environment:
+      MONGO_URL:  ${MONGO_URL}
+      SUBSCRIPTION_URL: ${SUBSCRIPTION_URL}
+      MAILER: ${MAILER_URL}
+      JWT_SECRET: ${JWT_SECRET}
+      SUBSCRIPTION_PRIVATE_API_URL: ${SUBSCRIPTION_PRIVATE_API_URL}
+      SUBSCRIPTION_PUBLIC_API_URL: ${SUBSCRIPTION_PUBLIC_API_URL}
+
+    

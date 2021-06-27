@@ -1,82 +1,14 @@
-
 # Subscription System
-
 Adidas NodeJs backend challenge - January 2021
 
-System is composed of four microservices:
+![diagram](./docs/diagram.svg)
+## Documentation
 
-* [public-api](/public-api/README.md): Backend for Frontend microservice to be used by UI frontend
-* [private-api](/private-api/README.md): Backend for admin microservice to be used by UI admin
-* subscription: Microservice imprementing subscription logic, including persistence of subscription data inmongo, and email notification to confirm process is completed.
-* mailer: microservice mocking email notifications. 
-
-It uses mongodb for persistance, and kafka for batching emails
-## Provided Operations:
-
-* create new subscription
-* cancel existing subscription
-* get details of a subscription
-* get all subscriptions
-
-
-## Run Locally
-
-Clone the project
-
-```bash
-git clone https://github.com/hacknlove/adidas-subscription-system
-```
-
-Go to the project directory
-
-```bash
-cd adidas-subscription-system
-```
-
-Install dependencies
-
-If you have node 14 and yarn you can do
-```bash
-yarn
-```
-
-if not you can do
-```bash
-docker-compose -f ./docker/dev/docker-compose.yml -p adidas-subscription-dev run subscription yarn
-```
-
-Start 
-
-```bash
-yarn dev
-```
-
-Create authentication tokens
-
-```
-yarn getToken admin
-```
-
-```
-yarn getToken foo@bar.buz
-```
-
-## Running Tests
-
-To run tests, run the following command
-
-```bash
-  yarn test
-```
-
-To run all unit tests in whatch mode
-
-```bash
-  yarn test:ci --watch
-```
-
-To run unit test of only one service
-
-```bash
-  yarn workspace private-api test --watch
-```
+* [((challenge notes))](./docs/challenge-notes.md)
+* [How to use the public api service](./docs/how-to-use-public-api.md)
+* [How to use the private api service](./docs/how-to-use-private-api.md)
+* [How to deploy subscription system](./docs/how-to-deploy-subscription-system.md)
+* [How to develop subscription system](./docs/how-to-develop-subscription-system.md)
+* [How to QA subscription system](./docs/how-to-qa-subscription-system.md)
+* [technical information](./docs/technical-information.md)
+* [Business information](./business-information.md)

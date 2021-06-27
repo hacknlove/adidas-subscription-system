@@ -4,19 +4,23 @@
   "main": "index.js",
   "author": "Antonio Fernández Porrúa <antonio@pykiss.com>",
   "license": "MIT",
+  "engines": { "node": ">=14.0.0 "},
   "workspaces": [
     "e2e",
     "mailer",
-    "public-api",
     "private-api",
-    "subscription",
-    "shared"
+    "private-sdk",
+    "public-api",
+    "public-sdk",
+    "shared",
+    "subscription"
   ],
   "type": "module",
   "private": true,
   "scripts": {
-    "createIndexes": "docker-compose -f ./docker/dev/docker-compose.yml -p adidas-subscription-dev exec bash ls ",
+    "createIndexes": "docker-compose -f ./docker/dev/docker-compose.yml -p adidas-subscription-dev exec mongo mongo /scripts/createIndexes.js",
     "getToken": "docker-compose -f ./docker/dev/docker-compose.yml -p adidas-subscription-dev exec public-api node scripts/jwt.js",
-    "dev": "docker-compose -f ./docker/dev/docker-compose.yml -p adidas-subscription-dev up"
+    "dev": "docker-compose -f ./docker/dev/docker-compose.yml -p adidas-subscription-dev up",
+    "test": "docker-compose -f ./docker/e2e/docker-compose.yml -p adidas-subscription-e2e up"
   }
 }

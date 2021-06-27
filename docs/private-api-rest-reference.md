@@ -33,7 +33,7 @@ GET /all
 ## <a name='Get-subscription-details'></a> Get subscription details
 [Back to top](#top)
 
-<p>Returns the details of the subscription</p>
+<p>Returns the details of one subscription</p>
 
 ```
 GET /[newsletterId]/[email]
